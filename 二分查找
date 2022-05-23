@@ -1,0 +1,45 @@
+#include<iostream>
+using namespace std;
+int fun(int* p,int num)
+{
+	int size = strlen(p) / sizeof(p[0]);
+	cout << size << endl;
+	int hight = size - 1;
+	int low = 0;
+	while (low <= hight)
+	{
+		int mid = (low + hight)/2;
+		if (p[mid] < num)
+		{
+			low = mid + 1;
+			
+		}
+		else if (p[mid] > num)
+		{
+			hight = mid - 1;
+		}
+		else
+		{
+			return mid;
+		}
+	}
+	return -1;
+}
+int main()
+{
+	int arr[] = { 1,2,3,4,5,6,7,8 };
+	int num;
+	cin >> num;
+	int s = fun(arr, num);
+	if (s == -1)
+	{
+		cout << "未找到此数" << endl;
+	}
+	else
+	{
+
+		cout << num << "的下标位置是：" << s << endl;
+
+	}
+	return 0;
+}
