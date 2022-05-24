@@ -1,0 +1,101 @@
+#include<stdio.h>
+#include<time.h>
+#include<stdlib.h>
+#define NORMAL 0
+#define THREAD 1
+typedef struct Node
+{
+	int key;
+	Node* lchild;
+	Node* rchild;//两个指针
+	int ltag, rtag;//标记，1为线索，0为正常边
+ }Node;
+
+Node* getNewNode(int key)
+{
+	Node* p = (Node*)malloc(sizeof(Node));
+	p->lchild = NULL;
+	p->rchild = NULL;
+	p->key = key;
+	p->ltag = p->rtag = NORMAL ;
+	return p;
+}
+void clear(Node* root) {
+	if (root == NULL) return;
+	if (root->ltag == NORMAL) clear(root->lchild);
+	if (root->rtag == NORMAL) clear(root->rchild);
+	free(root);
+	return;
+}
+Node* insert(Node* root,int key)
+{
+	if (root == NULL)
+		return getNewNode(key);
+	if (root->key == key)
+		return root;
+	if (root->key > key)
+		root->lchild = insert(root->lchild, key);
+	else
+		root->rchild = insert(root->rchild, key);
+	return root;
+}
+//线索化
+void build_thread(Node* root)
+{
+	if (root == NULL)
+		return ;
+	static Node* pre = NULL;//记录节点，前驱和后继
+	build_thread(root->lchild);
+	if (root->lchild == NULL)
+	{
+		root->lchild = pre;
+		root->ltag = THREAD;
+	}
+	if (pre != NULL && pre->rchild == NULL)
+	{
+		pre->rchild = root;
+		pre->rtag = THREAD;
+	}
+	pre = root;
+	build_thread(root->rchild);
+	return;
+}
+Node* leftMost(Node* p)
+{
+	while (p && p->ltag == NORMAL && p->lchild)
+		p = p->lchild;
+	return p;
+}
+void output(Node* root)
+{
+	Node* p = leftMost(root);
+	
+	while (p)
+	{
+		printf("%d ", p->key);
+		if (p->rtag == THREAD)
+		{
+			p = p->rchild;
+		}
+		else
+		{
+			p = leftMost(p->rchild);
+		}
+	}
+	printf("\n");
+	return;
+}
+int main() 
+{
+	srand(time(0));
+#define MAX_OP 20
+	Node* root = NULL;
+	for (int i = 0; i < MAX_OP; i++) {
+		int val = rand() % 100;
+		root = insert(root, val);
+	}
+	build_thread(root);
+	output(root);
+	clear(root);
+	return 0;
+}
