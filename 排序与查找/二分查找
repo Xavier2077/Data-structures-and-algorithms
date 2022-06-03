@@ -1,0 +1,76 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#include <time.h>
+#define MAX_OP 20
+//普通二分查找
+int binary_search1(int* arr, int n,int num)
+{
+    if (arr == NULL)
+    {
+        return NULL;
+    }
+    int head = 0, tail = n - 1, mid;
+    while (head <= tail)
+    {
+        mid = (head + tail) >> 1;
+        if (arr[mid] == num)
+        {
+            return mid;
+        }
+        if (arr[mid] > num)
+        {
+            tail = mid - 1;
+        }
+        else
+        {
+            head = mid + 1;
+        }
+    }
+    return -1;
+}
+//11111100000
+int binary_search2(int* arr,int num)
+{
+    int head = -1, tail = num-1, mid;
+    while (head < tail)
+    {
+        mid = (head + tail + 1) >> 1;
+        if (arr[mid] == 1)
+        {
+            head = mid;
+        }
+        else
+        {
+            tail = mid - 1;
+        }
+
+    }
+    return head;
+}
+//00001111
+int binary_search3(int* arr, int num)
+{
+    int head = 0, tail = num, mid;
+    while (head < tail)
+    {
+        mid = (head + tail) >> 1;
+
+        if (arr[mid] == 1)
+        {
+            tail = mid;
+        }
+        else
+        {
+            head = mid + 1;
+        }
+    }
+    return mid == num ? -1 : head;
+}
+int main()  
+{
+    int arr[] = { 1,1,1,1,0,0,0,0 };
+    int n=binary_search2(arr, 8);
+    printf("%d", n);
+    return 0;
+}
