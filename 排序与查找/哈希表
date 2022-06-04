@@ -1,0 +1,49 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+#define num 5
+//存放字符的哈希表
+typedef struct HashTable
+{
+    int size;
+    char* data;
+}hashtable;
+hashtable* init(void)
+{
+    hashtable* list = (hashtable*)malloc(sizeof(hashtable));
+    list->size  = 0;
+    list->data = (char*)malloc(sizeof(char)*num);
+    memset(list->data,0,sizeof(list->data));
+    return list;
+}
+int hash(int temp)
+{
+    return temp % num;
+}
+void hash_built(hashtable* list,char ch)
+{
+    int index = hash(ch);
+    if(list->data[index] !=0)
+    {
+        int count = 1;
+        while(list->data[index] != 0)
+        {
+            index = hash(hash(ch) + count);
+            count++;
+        }
+    }
+    list->data[hash(ch)] = ch ;
+    list->size++;
+    return;
+}
+int main()
+{
+    hashtable* hashtable1 = init();
+    hash_built(hashtable1,'A');
+    hash_built(hashtable1,'B');
+    for(int i = 0;i < hashtable1->size;i++)
+    {
+        printf("data[i]==%c\n",hashtable1->data[i]);
+    }
+    return 0;
+}
