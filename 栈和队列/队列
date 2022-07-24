@@ -1,0 +1,92 @@
+#include <iostream>
+using namespace std;
+#define OK 1
+#define ERROR 0
+#define OVER -1
+#define MAXSIZE 100
+typedef int status;
+typedef struct deque
+{
+	int* data;
+	int begin;
+	int end;
+	int length;
+}Deque;
+//初始化
+void init(Deque& D)
+{
+	D.data = new int[MAXSIZE];
+	D.begin = 0;
+	D.end = 0;
+	D.length =0;
+} 
+//入队：push
+status push_deque(Deque& D,int tmp)
+{
+	if(!D.data)
+	{
+		return ERROR;
+	}
+	if(D.length == MAXSIZE)
+	{
+		cout << "队列元素已满" << endl; 
+	}
+	D.data[D.end] = tmp;
+	D.end++;
+	D.length++;
+	return OK;
+}
+//出队：pop
+status pop_deque(Deque& D)
+{
+	if(!D.data)
+	{
+		return ERROR;
+	}
+	if(D.length == 0)
+	{
+		cout << "队列为空" << endl; 
+	}
+	D.end--;
+	D.length--;
+	return OK;
+}
+//队头：front
+int front_deque(Deque D)
+{
+	if(!D.data)
+	{
+		return 0;
+	}
+	if(D.length == 0)
+	{
+		cout << "队列为空" << endl; 
+	}
+	return D.data[D.begin];
+}
+//对大小：size
+int size_deque(Deque D)
+{
+	if(!D.data)
+	{
+		return 0;
+	}
+	return D.length; 
+}
+//队空：empty
+bool empty_deque(Deque D)
+{
+	if(!D.data)
+	{
+		exit(OVER);
+	}
+	if(D.length != 0)
+	{
+		return true;
+	}
+	return false;
+}
+int main()
+{
+	return 0;
+}
