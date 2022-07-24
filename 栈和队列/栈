@@ -1,0 +1,68 @@
+#include <iostream>
+using namespace std;
+#define OK 1
+#define ERROR 0
+#define OVER -1
+#define MAXSIZE 100
+typedef int status;
+typedef struct stack
+{
+	int top;
+	int* data;
+	int length;
+}Stack;
+status init_stack(Stack& S)
+{
+	S.data = new int[MAXSIZE];
+	S.top = -1;
+	S.length = 0;
+	return OK;
+}
+//push, 将元素推入栈
+status push_stack(Stack& S,int tmp)
+{
+	if(!S.data)
+	{
+		return ERROR;
+	}
+	if(S.length == MAXSIZE)
+	{
+		cout << "栈区元素已满" << endl;
+	}
+	S.top++;
+	S.data[S.top] = tmp;
+	S.length++;
+	return OK;
+}
+//pop, 将元素弹出栈
+status pop_stack(Stack& S)
+{
+	if(!S.data)
+	{
+		return ERROR;
+	}
+	if(S.length == 0)
+	{
+		cout << "栈区为空" << endl;
+	}
+	S.top--;
+	S.length--;
+	return OK;
+} 
+//top, 取栈顶的元素
+int top_stack(Stack S)
+{
+	if(!S.data)
+	{
+		return ERROR;
+	}
+	if(S.length == 0)
+	{
+		cout << "栈区为空" << endl;
+	}
+	return S.data[S.top];
+}
+int main()
+{
+	return 0;
+}
