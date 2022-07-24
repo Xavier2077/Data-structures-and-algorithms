@@ -62,6 +62,15 @@ int top_stack(Stack S)
 	}
 	return S.data[S.top];
 }
+//empty,判空
+status empty(Stack S)
+{
+	if(S.length != 0)
+	{
+		return 0;
+	}
+	return OK;
+} 
 int main()
 {
 	return 0;
