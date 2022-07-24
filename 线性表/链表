@@ -1,0 +1,62 @@
+#include <iostream>
+#define OK 1
+#define ERROR 0
+using namespace std;
+typedef struct LNode
+{
+	int data;	 //数据域 
+	LNode* next; //指针域 
+}LNode;
+//初始化链表
+LNode* init_list()
+{
+	LNode* p = new LNode;
+	p->next = NULL;
+	return p;
+}
+//获取链表中指定位置的元素
+int get_list(LNode* L,int i,int* tmp)
+{
+	LNode* p = L->next;
+	int j = 1;
+	while(p && j < i)
+	{
+		p = p->next;
+		++j;
+	}
+	if(!p || j > i)
+	{
+		return ERROR;
+	}
+	*tmp = p->data;
+	return OK;
+} 
+int insert_list(LNode* L,int i,int* tmp)
+{
+	if(!L->next)
+	{
+		return ERROR;
+	} 
+	LNode* p = L->next;
+	int j = 1;
+	while(p && j < i - 1)
+	{
+		p = p->next;
+		j++;
+	}
+	if(!p || j > i -1)
+	{
+		return ERROR;
+	}
+	LNode* pre = p->next;
+	p->next = new LNode;
+	p->next->data = *tmp;
+	p->next->next = pre;
+	return OK;
+}
+int main()
+{
+	LNode* L = init_list();
+	
+	return 0;
+} 
