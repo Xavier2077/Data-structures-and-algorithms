@@ -1,0 +1,82 @@
+#include <iostream>
+#include <string>
+using namespace std;
+#define OK 1
+#define ERROR 0
+#define OVER -1
+typedef int status;
+typedef struct binary_tree
+{
+	string data;
+	struct binary_tree* lchild;
+	struct binary_tree* rchild;
+}BTree,*btree;
+//创建一个树
+void creat_tree(btree T)
+{
+	T->data = 'A';
+	T->lchild = new BTree;
+	T->lchild->data = 'B';
+	T->lchild->lchild = new BTree;
+	T->lchild->lchild->data = 'C';
+	T->lchild->lchild->lchild = T->lchild->lchild->rchild = NULL;
+	T->rchild = new BTree;
+	T->rchild->data = 'D';
+	T->rchild->lchild = NULL;
+	T->rchild->rchild = NULL;
+}
+//前序遍历
+void pre_traverse(btree T)
+{
+	if(T == NULL)
+	{
+		return;
+	}
+	else
+	{
+		cout << T->data;
+		pre_traverse(T->lchild);
+		pre_traverse(T->rchild);
+	}
+	return ;
+}
+//中序遍历
+void in_traverse(btree T)
+{
+	if(T == NULL)
+	{
+		return;
+	}
+	else
+	{	
+		pre_traverse(T->lchild);
+		cout << T->data;
+		pre_traverse(T->rchild);
+	}
+	return ;
+}
+//后序遍历 
+void post_traverse(btree T)
+{
+	if(T == NULL)
+	{
+		return;
+	}
+	else
+	{
+		
+		pre_traverse(T->lchild);
+		pre_traverse(T->rchild);
+		cout << T->data;
+	}
+	return ;
+}
+ 
+int main()
+{
+	btree root = new BTree;
+	creat_tree(root);
+	in_traverse(root);
+	delete root;
+	return 0;
+} 
