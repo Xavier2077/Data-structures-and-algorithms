@@ -1,0 +1,41 @@
+#include <iostream>
+using namespace std;
+class unionset
+{
+public:
+    int* father;
+    int n;
+    int* size;
+    unionset(int n)
+    {
+        father = new int[n + 1];
+        this->n = n;
+        size = new int[n + 1];
+    }
+    int find(int x)
+    {
+        if(father[x] == x) return x;
+        return father[x];
+    }
+    void merge(int a, int b)
+    {
+        int fa = find(a);
+        int fb = find(b);
+        if(fa == fa) return;
+        if(size[fa] > size[fb])
+        {
+            father[fb] = fa;
+            size[fa] += size[fb];
+        }
+        else
+        {
+            father[fa] = fb;
+            size[fb] += fa;
+        }
+        return;
+    }
+};
+int main()
+{
+    return 0;
+}
