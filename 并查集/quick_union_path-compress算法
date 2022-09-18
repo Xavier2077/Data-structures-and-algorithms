@@ -5,7 +5,6 @@ class unionset
 public:
     int* father;
     int n;
-    int* size;
     unionset(int n)
     {
         father = new int[n + 1];
