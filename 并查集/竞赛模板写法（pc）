@@ -1,0 +1,26 @@
+#include <iostream>
+using namespace std;
+class unionset
+{
+public:
+    int* father;
+    int n;
+    unionset(int n)
+    {
+        father = new int[n + 1];
+        this->n = n;
+    }
+    int get(int x)
+    {
+       return father[x] = (father[x] == x? x : get(x));
+    }
+    void merge(int a, int b)
+    {
+        father[get(a)] = get(b);
+        return;
+    }
+};
+int main()
+{
+    return 0;
+}
