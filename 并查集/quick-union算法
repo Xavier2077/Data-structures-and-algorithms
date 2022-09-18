@@ -21,10 +21,10 @@ public:
     }
     void merge(int a, int b)
     {
-        a = find(a);
-        b = find(b);
-        if(a == b) return;
-        father[a] = b;
+        fa = find(a);
+        fb = find(b);
+        if(fa == fb) return;
+        father[fa] =f b;
         return;
     }
 };
