@@ -9,7 +9,6 @@ public:
     {
         father = new int[n + 1];
         this->n = n;
-        size = new int[n + 1];
     }
     int find(int x)
     {
