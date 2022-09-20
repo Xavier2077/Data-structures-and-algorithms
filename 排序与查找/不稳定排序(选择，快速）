@@ -43,7 +43,7 @@ void quick_sort(int* arr, int l, int r)
         if (arr[x] > z)
         {
             arr[y] = arr[x];
-            x++;
+            y--;
         }
     }
     arr[x] = z;
