@@ -24,7 +24,7 @@ public:
         fa = find(a);
         fb = find(b);
         if(fa == fb) return;
-        father[fa] =f b;
+        father[fa] = fb;
         return;
     }
 };
