@@ -9,6 +9,10 @@ public:
     {
         father = new int[n + 1];
         this->n = n;
+         for(int i = 0;i < n;++i)
+         {
+            ather[i] = i;
+         }
     }
     int find(int x)
     {
