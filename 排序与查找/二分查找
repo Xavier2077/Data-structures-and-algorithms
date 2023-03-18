@@ -10,8 +10,8 @@ int binary_search1(int* arr, int n,int num)
     {
         return NULL;
     }
-    int head = 0, tail = n - 1, mid;
-    while (head <= tail)
+    int head = -1, tail = n, mid;
+    while (head < tail)
     {
         mid = (head + tail) >> 1; // mid = head + ((tail - head) >> 1)避免越界
         if (arr[mid] == num)
