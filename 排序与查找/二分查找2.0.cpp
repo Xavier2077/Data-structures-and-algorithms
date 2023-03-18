@@ -7,7 +7,7 @@ int binary_search(int l, int r, int target)//查找第一个>= 1的元素,即查
     while(l + 1 != r)
     {
         int mid = l + r >> 1;
-        if(arr[mid] <= target) l = mid;
+        if(arr[mid] < target) l = mid;
         else r = mid;
     }
     return r;
@@ -17,7 +17,7 @@ int binary_search2(int l, int r, int target)//查找最后一个小于1的元素
     while(l + 1 != r)
     {
         int mid = l + r >> 1;
-        if(arr[mid] >= target) r = mid;
+        if(arr[mid] > target) r = mid;
         else l = mid;
     }
     return l;
