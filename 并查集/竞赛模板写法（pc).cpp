@@ -25,6 +25,10 @@ public:
             father[get(a)] = get(b);
             return;
         }
+        bool same(int a, int b)
+        {
+             return get(a) ==  get(b);
+        }
     };
 int main()
 {
